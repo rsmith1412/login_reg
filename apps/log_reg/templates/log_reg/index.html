@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login/Reg</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'log_reg/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-5 register">
+                <div class="form1">
+                <h2>Register here!</h2>
+                    <form action="/register" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            First name: <input type="text" class="form-control" name="first_name">
+                        </div>
+                        <div class="form-group">
+                            Last name: <input type="text" class="form-control" name="last_name">
+                        </div>
+                        <div class="form-group">
+                            Email: <input type="email" class="form-control" name="email">
+                        </div>
+                        <div class="form-group">
+                            Password: <input type="password" class="form-control" name="password">
+                        </div>
+                        <div class="form-group">
+                            Confirm Password: <input type="password" class="form-control" name="confirm_password">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Register">
+                        </div>
+                    </form>
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == "reg" %}
+                        <p style="color: red">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="col-5 login">
+                <div class="form2">
+                    <h2>Login</h2>
+                    <form action="/login" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            Email: <input type="email" class="form-control" name="email">
+                        </div>
+                        <div class="form-group">
+                            Password: <input type="password" class="form-control" name="password_login">
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-success" value="Login">
+                        </div>
+                    </form>
+                </div>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == "login" %}
+                        <p style="color: red">{{message}}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
